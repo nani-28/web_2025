@@ -1,0 +1,19 @@
+{
+  "name": "web-2025-backend",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node src/server.js",
+    "migrate": "npx knex migrate:latest",
+    "rollback": "npx knex migrate:rollback"
+  },
+"dependencies": {
+  "fastify": "^4.29.1",
+  "@fastify/cors": "^8.4.2",
+  "@fastify/formbody": "^7.4.0",
+  "knex": "^3.1.0",
+  "pg": "^8.12.0",
+  "dotenv": "^16.4.5"
+}
+
+}
