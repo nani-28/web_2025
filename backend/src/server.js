@@ -5,7 +5,7 @@ const cors = require('@fastify/cors');
 const formbody = require('@fastify/formbody');
 const knexLib = require('knex');
 
-// Configuración de la base de datos con Knex
+// Confi BD con Knex
 const knex = knexLib({
   client: 'pg',
   connection: {
@@ -16,7 +16,7 @@ const knex = knexLib({
   },
 });
 
-// Plugins Fastify
+// Fastify
 fastify.register(cors, { origin: '*' });
 fastify.register(formbody);
 
@@ -29,18 +29,18 @@ fastify.get('/', async () => {
 fastify.post('/api/form', async (request, reply) => {
   const { name, email, message } = request.body;
 
-  // Validaciones básicas
+  // Validaciones 
   if (!name || !email || !message) {
     return reply.status(400).send({ error: 'Todos los campos son obligatorios' });
   }
 
-  // Validación simple de email
+  // Validación de email
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return reply.status(400).send({ error: 'Email no es válido' });
   }
 
-  // Guardar en la base de datos
+  // Guardar en la BD
   try {
     await knex('submissions').insert({ name, email, message });
     return reply.send({ success: true, message: 'Datos guardados correctamente' });
